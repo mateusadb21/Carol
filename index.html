@@ -17,25 +17,25 @@
       --shadow: rgba(255, 107, 129, 0.3);
     }
 
-   html, body {
-    height: 100%;
-    margin: 0;
-    font-family: 'Merriweather', serif;
-    background: radial-gradient(ellipse at 20% 20%, rgba(255, 107, 129, 0.15), transparent 20%), linear-gradient(135deg, var(--bg1), var(--bg2));
-    background-size: 200% 200%;
-    animation: background-pulse 20s infinite ease-in-out;
-    display: grid;
-    place-items: center;
-    color: var(--text-color);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Merriweather', serif;
+      background: radial-gradient(ellipse at 20% 20%, rgba(255, 107, 129, 0.15), transparent 20%), linear-gradient(135deg, var(--bg1), var(--bg2));
+      background-size: 200% 200%;
+      animation: background-pulse 20s infinite ease-in-out;
+      display: grid;
+      place-items: center;
+      color: var(--text-color);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-@keyframes background-pulse {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+    @keyframes background-pulse {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
     .scene {
       width: min(900px, 90vw);
@@ -57,11 +57,6 @@
       box-sizing: border-box;
       user-select: none;
       cursor: pointer;
-      transition:
-        box-shadow 0.6s ease,
-        transform 0.6s ease,
-        background 0.6s ease,
-        color 0.6s ease;
       font-weight: 700;
       font-size: 1.4rem;
       color: var(--accent);
@@ -72,7 +67,13 @@
       justify-content: center;
       height: 140px;
       text-align: center;
-      padding: 0 40px; /* para não encostar nas bordas */
+      padding: 0 40px;
+      transition:
+        box-shadow 0.6s ease,
+        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        background 0.6s ease,
+        color 0.6s ease;
+      will-change: transform, box-shadow;
     }
 
     /* Carta aberta */
@@ -86,50 +87,38 @@
       background: transparent;
       box-shadow: none;
       display: block;
-      transform: scale(1);
+      transform: scale(1.05) translateY(-20px);
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* Container do texto da carta com fundo branco */
-   .card.open {
-    cursor: default;
-    height: auto;
-    padding: 0;
-    font-weight: normal;
-    font-size: 1rem;
-    color: var(--text-color);
-    background: transparent;
-    box-shadow: none;
-    display: block;
-    animation: none;
-    transform: translateY(-20px) scale(1.05);
-    transition: transform 1s ease;
-}
+    #letterArea {
+      max-width: 700px;
+      margin: 20px auto 0;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(255, 107, 129, 0.25);
+      padding: 40px 50px;
+      color: var(--text-color);
+      font-size: 1.15rem;
+      line-height: 1.8;
+      white-space: pre-line;
+      max-height: 60vh;
+      overflow-y: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s ease 0.3s, transform 1.2s ease 0.3s;
+      user-select: text;
+      display: none;
+      will-change: opacity, transform;
+    }
 
-#letterArea {
-    max-width: 700px;
-    margin: 20px auto 0;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(255, 107, 129, 0.25);
-    padding: 40px 50px;
-    color: var(--text-color);
-    font-size: 1.15rem;
-    line-height: 1.8;
-    white-space: pre-line;
-    max-height: 60vh;
-    overflow-y: auto;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1.5s ease 0.8s, transform 1.5s ease 0.8s;
-    user-select: text;
-    display: none;
-}
+    #letterArea.visible {
+      opacity: 1;
+      display: block;
+      transform: translateY(0);
+    }
 
-#letterArea.visible {
-    opacity: 1;
-    display: block;
-    transform: translateY(0);
-}
     /* Botão para tocar música */
     #playMusic {
       margin-top: 20px;
@@ -229,7 +218,7 @@
 </head>
 <body>
   <div class="scene">
-    <div class="card" id="card" role="button" aria-pressed="false" tabindex="0">
+    <div class="card" id="card" role="button" aria-pressed="false" tabindex="0" aria-label="Abrir a cartinha">
       <span id="cardText">Abrir a cartinha</span>
       <div class="big-heart" title="Meu coração" aria-hidden="true">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" >
@@ -330,4 +319,3 @@ Mateus ❤️`;
   </script>
 </body>
 </html>
-

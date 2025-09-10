@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carol, meu eterno amor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+      overflow-x: hidden;
+      color: #4a0e25;
+    }
+
+    .container {
+      text-align: center;
+      padding: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      color: #b3003b;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .typing {
+      font-size: 1.2em;
+      line-height: 1.6;
+      white-space: pre-line;
+      display: inline-block;
+      border-right: 2px solid #b3003b;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      0% { border-color: transparent; }
+      50% { border-color: #b3003b; }
+      100% { border-color: transparent; }
+    }
+
+    /* Botão */
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #b3003b;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #d6336c;
+    }
+
+    /* Corações animados */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      color: rgba(255, 0, 90, 0.7);
+      animation: rise 6s linear forwards;
+      z-index: 0;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Carol, meu eterno amor.</h1>
+    <button onclick="startLetter()">Abrir a cartinha 💌</button>
+    <p id="letter" class="typing"></p>
+  </div>
+
+  <audio id="bg-music" loop>
+    <source src="https://files.catbox.moe/t2u3g2.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const text = `Meu amor,
+
+Eu queria que você pudesse sentir, em cada palavra, o tanto que eu te amo. 
+Essa cartinha é só uma forma de mostrar o quanto você é especial, única e essencial pra mim.
+
+Você é minha paz, minha alegria e o motivo do meu sorriso bobo todos os dias. 
+Prometo cuidar de você, estar ao seu lado e te amar cada vez mais.
+
+Sempre seu,
+Mateus ❤️`;
+
+    const letterEl = document.getElementById("letter");
+    const music = document.getElementById("bg-music");
+    let i = 0;
+
+    function startLetter() {
+      music.play();
+      typeWriter();
+    }
+
+    function typeWriter() {
+      if (i < text.length) {
+        letterEl.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50); // Velocidade da digitação
+      } else {
+        letterEl.style.borderRight = "none"; // tira o cursor no final
+      }
+    }
+
+    // Criar corações animados
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "❤";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 800);
+  </script>
+</body>
+</html>

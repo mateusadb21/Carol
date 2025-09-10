@@ -1,255 +1,259 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Carol, meu eterno amor</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Carol, meu eterno amor</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
 
-  <style>
-    :root {
-      --bg1: #1a0f1f;
-      --bg2: #58181f;
-      --card-bg: #fff;
-      --accent: #ff6b81;
-      --text-color: #3a1f1f;
-      --shadow: rgba(255, 107, 129, 0.3);
-    }
+    <style>
+        :root {
+            --bg1: #1a0f1f;
+            --bg2: #58181f;
+            --card-bg: #fff;
+            --accent: #ff6b81;
+            --text-color: #3a1f1f;
+            --shadow: rgba(255, 107, 129, 0.3);
+        }
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: 'Merriweather', serif;
-      background: radial-gradient(ellipse at 20% 20%, rgba(255, 107, 129, 0.15), transparent 20%), linear-gradient(135deg, var(--bg1), var(--bg2));
-      background-size: 200% 200%;
-      animation: background-pulse 20s infinite ease-in-out;
-      display: grid;
-      place-items: center;
-      color: var(--text-color);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Merriweather', serif;
+            background: radial-gradient(ellipse at 20% 20%, rgba(255, 107, 129, 0.15), transparent 20%), linear-gradient(135deg, var(--bg1), var(--bg2));
+            background-size: 200% 200%;
+            animation: background-pulse 20s infinite ease-in-out;
+            display: grid;
+            place-items: center;
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-    @keyframes background-pulse {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        @keyframes background-pulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    .scene {
-      width: min(900px, 90vw);
-      max-width: 900px;
-      padding: 20px;
-      text-align: center;
-    }
+        .scene {
+            width: min(900px, 90vw);
+            max-width: 900px;
+            padding: 20px;
+            text-align: center;
+        }
 
-    /* Carta container */
-    .card {
-      width: 100%;
-      max-width: 700px;
-      background: linear-gradient(135deg, #fff0f2 0%, #ffe6e9 100%);
-      border-radius: 20px;
-      box-shadow: 0 20px 40px var(--shadow);
-      position: relative;
-      overflow: hidden;
-      border: 2px solid var(--accent);
-      box-sizing: border-box;
-      user-select: none;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 1.4rem;
-      color: var(--accent);
+        /* Carta fechada */
+        .card {
+            width: 100%;
+            max-width: 700px;
+            background: linear-gradient(135deg, #fff0f2 0%, #ffe6e9 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px var(--shadow);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--accent);
+            box-sizing: border-box;
+            user-select: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--accent);
+            display: grid;
+            place-items: center;
+            height: 140px;
+            padding: 0 40px;
+            text-align: center;
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
 
-      /* Flex para centralizar o texto */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 140px;
-      text-align: center;
-      padding: 0 40px;
-      transition:
-        box-shadow 0.6s ease,
-        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-        background 0.6s ease,
-        color 0.6s ease;
-      will-change: transform, box-shadow;
-    }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(255, 107, 129, 0.45);
+        }
 
-    /* Carta aberta */
-    .card.open {
-      cursor: default;
-      height: auto;
-      padding: 0;
-      font-weight: normal;
-      font-size: 1rem;
-      color: var(--text-color);
-      background: transparent;
-      box-shadow: none;
-      display: block;
-      transform: scale(1.05) translateY(-20px);
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+        /* Carta aberta */
+        .card.open {
+            cursor: default;
+            height: auto;
+            padding: 0;
+            font-weight: normal;
+            font-size: 1rem;
+            color: var(--text-color);
+            background: transparent;
+            box-shadow: none;
+            display: block;
+            transform: scale(1.05) translateY(-20px);
+            transition: transform 0.8s ease;
+            animation: none;
+        }
 
-    /* Container do texto da carta com fundo branco */
-    #letterArea {
-      max-width: 700px;
-      margin: 20px auto 0;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(255, 107, 129, 0.25);
-      padding: 40px 50px;
-      color: var(--text-color);
-      font-size: 1.15rem;
-      line-height: 1.8;
-      white-space: pre-line;
-      max-height: 60vh;
-      overflow-y: auto;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1.2s ease 0.3s, transform 1.2s ease 0.3s;
-      user-select: text;
-      display: none;
-      will-change: opacity, transform;
-    }
+        /* Container do texto da carta com fundo branco */
+        #letterArea {
+            max-width: 700px;
+            margin: 20px auto 0;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(255, 107, 129, 0.25);
+            padding: 40px 50px;
+            color: var(--text-color);
+            font-size: 1.15rem;
+            line-height: 1.8;
+            white-space: pre-line;
+            max-height: 60vh;
+            overflow-y: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.2s ease 0.3s, transform 1.2s ease 0.3s;
+            user-select: text;
+            display: none;
+        }
 
-    #letterArea.visible {
-      opacity: 1;
-      display: block;
-      transform: translateY(0);
-    }
+        #letterArea.visible {
+            opacity: 1;
+            display: block;
+            transform: translateY(0);
+        }
 
-    /* Botão para tocar música */
-    #playMusic {
-      margin-top: 20px;
-      padding: 12px 24px;
-      border-radius: 9999px;
-      background: linear-gradient(90deg, var(--accent), #ff9fb8);
-      color: white;
-      font-weight: 700;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      user-select: none;
-      box-shadow: 0 4px 12px rgba(255, 107, 129, 0.4);
-      display: none;
-    }
-    #playMusic:hover {
-      background: linear-gradient(90deg, #ff9fb8, var(--accent));
-    }
+        /* Botão para tocar música */
+        #playMusic {
+            margin-top: 20px;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, var(--accent), #ff9fb8);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            user-select: none;
+            box-shadow: 0 4px 12px rgba(255, 107, 129, 0.4);
+            display: none;
+        }
 
-    /* Coração moderno no topo direito */
-    .big-heart {
-      position: absolute;
-      right: 25px;
-      top: 25px;
-      width: 70px;
-      height: 70px;
-      filter: drop-shadow(0 0 6px var(--accent));
-      animation: beat 1.2s infinite ease-in-out;
-      z-index: 10;
-      user-select: none;
-      transition: filter 0.3s ease;
-    }
-    .big-heart svg {
-      width: 100%;
-      height: 100%;
-      fill: var(--accent);
-      filter: drop-shadow(0 0 8px var(--accent));
-      transition: filter 0.3s ease, transform 0.3s ease;
-    }
-    .big-heart:hover svg {
-      filter: drop-shadow(0 0 15px #ff8aa0);
-      transform: scale(1.1);
-    }
+        #playMusic:hover {
+            background: linear-gradient(90deg, #ff9fb8, var(--accent));
+        }
 
-    @keyframes beat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
+        /* Coração moderno no topo direito */
+        .big-heart {
+            position: absolute;
+            right: 25px;
+            top: 25px;
+            width: 70px;
+            height: 70px;
+            filter: drop-shadow(0 0 6px var(--accent));
+            animation: beat 1.2s infinite ease-in-out, glow 2s infinite alternate;
+            z-index: 10;
+            user-select: none;
+        }
 
-    /* Meta texto */
-    .meta {
-      font-size: 0.9rem;
-      color: #7a4a56;
-      margin-top: 18px;
-      font-style: italic;
-      user-select: none;
-    }
+        .big-heart svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--accent);
+            filter: drop-shadow(0 0 8px var(--accent));
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
 
-    /* Scrollbar estilizado para a carta */
-    #letterArea::-webkit-scrollbar {
-      width: 8px;
-    }
-    #letterArea::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 4px;
-    }
-    #letterArea::-webkit-scrollbar-thumb {
-      background: var(--accent);
-      border-radius: 4px;
-    }
+        .big-heart:hover svg {
+            filter: drop-shadow(0 0 15px #ff8aa0);
+            transform: scale(1.1);
+        }
 
-    /* Responsivo */
-    @media (max-width: 600px) {
-      .card {
-        font-size: 1.2rem;
-        height: 120px;
-        padding: 0 30px;
-      }
-      .card.open {
-        font-size: 1rem;
-        padding: 0;
-      }
-      #letterArea {
-        font-size: 1rem;
-        max-height: 50vh;
-        padding: 30px 25px;
-      }
-      .big-heart {
-        width: 50px;
-        height: 50px;
-        right: 15px;
-        top: 15px;
-      }
-    }
-  </style>
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes glow {
+            0% { filter: drop-shadow(0 0 10px var(--accent)); }
+            100% { filter: drop-shadow(0 0 20px var(--accent)); }
+        }
+
+        /* Meta texto */
+        .meta {
+            font-size: 0.9rem;
+            color: #7a4a56;
+            margin-top: 18px;
+            font-style: italic;
+            user-select: none;
+        }
+
+        /* Scrollbar estilizado para a carta */
+        #letterArea::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #letterArea::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        #letterArea::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        /* Responsivo */
+        @media (max-width: 600px) {
+            .card {
+                font-size: 1.2rem;
+                height: 120px;
+                padding: 0 30px;
+            }
+            .card.open {
+                font-size: 1rem;
+                padding: 0;
+            }
+            #letterArea {
+                font-size: 1rem;
+                max-height: 50vh;
+                padding: 30px 25px;
+            }
+            .big-heart {
+                width: 50px;
+                height: 50px;
+                right: 15px;
+                top: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="scene">
-    <div class="card" id="card" role="button" aria-pressed="false" tabindex="0" aria-label="Abrir a cartinha">
-      <span id="cardText">Abrir a cartinha</span>
-      <div class="big-heart" title="Meu coração" aria-hidden="true">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" >
-          <path d="M12 21s-7.5-4.873-9.333-7.333C.69 10.926 3.333 6 7.333 6 9.8 6 12 8 12 8s2.2-2 4.667-2C20.667 6 23.31 10.926 21.333 13.667 19.5 16.127 12 21 12 21z"/>
-        </svg>
-      </div>
+    <div class="scene">
+        <div class="card" id="card" role="button" aria-pressed="false" tabindex="0" aria-label="Abrir a cartinha">
+            <span id="cardText">Abrir a cartinha</span>
+            <div class="big-heart" title="Meu coração" aria-hidden="true">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" >
+                    <path d="M12 21s-7.5-4.873-9.333-7.333C.69 10.926 3.333 6 7.333 6 9.8 6 12 8 12 8s2.2-2 4.667-2C20.667 6 23.31 10.926 21.333 13.667 19.5 16.127 12 21 12 21z"/>
+                </svg>
+            </div>
+        </div>
+
+        <div id="letterArea" aria-live="polite" aria-label="Carta de amor">
+            <button id="playMusic" aria-label="Tocar música">▶ Tocar música</button>
+            <div class="meta">Clique no botão acima para tocar nossa música especial enquanto lê. 💖</div>
+            <div style="margin-top:8px;font-size:13px;color:#7a4a56;text-align:center;user-select:none;">Feito com carinho por <strong>Mateus</strong> ❤️</div>
+        </div>
     </div>
 
-    <div id="letterArea" aria-live="polite" aria-label="Carta de amor">
-      <!-- Texto da carta será inserido aqui -->
-      <button id="playMusic" aria-label="Tocar música">▶ Tocar música</button>
-      <div class="meta">Clique no botão acima para tocar nossa música especial enquanto lê. 💖</div>
-      <div style="margin-top:8px;font-size:13px;color:#7a4a56;text-align:center;user-select:none;">Feito com carinho por <strong>Mateus</strong> ❤️</div>
-    </div>
-  </div>
+    <audio id="bgAudio" src="https://your-music-link.mp3" preload="auto"></audio>
 
-  <!-- Substitua o src abaixo pelo link da sua música especial que funcione sem autenticação -->
-  <audio id="bgAudio" src="https://your-music-link.mp3" preload="auto"></audio>
+    <script>
+        const card = document.getElementById('card');
+        const cardText = document.getElementById('cardText');
+        const letterArea = document.getElementById('letterArea');
+        const playMusic = document.getElementById('playMusic');
+        const bgAudio = document.getElementById('bgAudio');
 
-  <script>
-    const card = document.getElementById('card');
-    const cardText = document.getElementById('cardText');
-    const letterArea = document.getElementById('letterArea');
-    const playMusic = document.getElementById('playMusic');
-    const bgAudio = document.getElementById('bgAudio');
+        // Inicialmente esconder texto e botão música
+        letterArea.style.display = 'none';
+        playMusic.style.display = 'none';
 
-    // Inicialmente esconder texto e botão música
-    letterArea.style.display = 'none';
-    playMusic.style.display = 'none';
-
-    const letterText = `Oiii, meu amor! ❤️
+        const letterText = `Oiii, meu amor! ❤️
 
 Espero que você esteja bem. Escrevi esta cartinha porque não consegui colocar tudo o que queria no presentinho, então criei este site para escrever para você com todo meu carinho. ✨
 
@@ -271,7 +275,7 @@ Me faltam palavras para dizer o quanto eu te amo, porque é um amor que transcen
 
 Eu amo seus olhinhos verdes, eles são tão lindos. Amo seu sorrisinho (agora com aparelhinho, rs). Amo sua voz, que me acalma só de ouvir. Amo seu cabelo, sua franjinha tão linda. Mas, acima de tudo, amo sua gentileza, sua bondade, seu jeito de ser. Amo sua alma. Eu te amo por completo, em cada detalhe seu. 💘
 
-E, como a diva Mitski já cantava: “You are the one who makes me feel alive.” Você é a minha melhor parte, aquela que eu nem sabia que faltava até te encontrar. Você não preencheu um vazio em mim, você me mostrou que eu tinha um espaço — e que ele é só seu. 🔒
+E, como o sonhador de Noites Brancas, eu sinto que a minha vida antes de você era um sonho solitário, mas você me despertou para a melhor realidade que eu poderia imaginar. Já cantava a diva Mitski: “You are the one who makes me feel alive.” Você é a minha melhor parte, aquela que eu nem sabia que faltava até te encontrar. Você não preencheu um vazio em mim, você me mostrou que eu tinha um espaço — e que ele é só seu. 🔒
 
 Sei que a vida não é perfeita e que teremos desafios, mas prometo estar ao seu lado em cada passo, segurando sua mão, enxugando suas lágrimas e celebrando cada conquista sua. 🫂
 
@@ -283,39 +287,37 @@ Eu te amo com tudo o que sou, com tudo o que tenho e com tudo que ainda vou ser.
 
 Feliz nosso primeiro mês juntos! 🎉🎉 É o primeiro de muitos. Já me imagino com você nas bodas de ouro, velhinhos e felizes. 🥺
 
-Com todo meu amor,  
+Com todo meu amor,  
 Mateus ❤️`;
 
-    function openLetter() {
-      if (!card.classList.contains('open')) {
-        card.classList.add('open');
-        cardText.textContent = ''; // Remove texto "Abrir a cartinha"
-        letterArea.style.display = 'block';
-        letterArea.classList.add('visible');
-        letterArea.insertAdjacentText('afterbegin', letterText);
-        playMusic.style.display = 'inline-block';
-      }
-    }
+        function openLetter() {
+            if (!card.classList.contains('open')) {
+                card.classList.add('open');
+                cardText.textContent = '';
+                letterArea.style.display = 'block';
+                letterArea.classList.add('visible');
+                letterArea.insertAdjacentText('afterbegin', letterText);
+                playMusic.style.display = 'inline-block';
+            }
+        }
 
-    card.addEventListener('click', openLetter);
+        card.addEventListener('click', openLetter);
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openLetter();
+            }
+        });
 
-    // Acessibilidade: abrir carta com Enter ou Espaço
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openLetter();
-      }
-    });
-
-    playMusic.addEventListener('click', () => {
-      if (bgAudio.paused) {
-        bgAudio.play().catch(() => alert('O navegador bloqueou autoplay. Toque manualmente no player se necessário.'));
-        playMusic.textContent = '⏸ Pausar música';
-      } else {
-        bgAudio.pause();
-        playMusic.textContent = '▶ Tocar música';
-      }
-    });
-  </script>
+        playMusic.addEventListener('click', () => {
+            if (bgAudio.paused) {
+                bgAudio.play().catch(() => alert('O navegador bloqueou autoplay. Toque manualmente no player se necessário.'));
+                playMusic.textContent = '⏸ Pausar música';
+            } else {
+                bgAudio.pause();
+                playMusic.textContent = '▶ Tocar música';
+            }
+        });
+    </script>
 </body>
 </html>
